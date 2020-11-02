@@ -47,7 +47,7 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to test the connection of the input target system configured in connection on SSM
 		 * 
-		 * @param configData the config data for target connection information holds connection attributes
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
 		 * @param filterData the Input data for the configured attributes through setConfig from connection 
 		 * @return the boolean true or false
 		 * @throws ConnectorException the connector exception throws connector exception
@@ -66,7 +66,7 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to process reconciliation for users and accounts by extracting the input for Recon from SSM Connection attributes when initiated a Recon job in SSM
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
 		 * @param dataFromEcm the Input data for the configured attributes through setConfig from connection 
 		 * @param formatterClass the formatter class
 		 */
@@ -91,8 +91,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to check existing record for the input object such as users inputed from SSM connection attributes.
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
-		 * @param filterData the Input data for the configured attributes through setConfig from connection 
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
 		 * @param serachableObject the serachable object to retrieve the inputed entity information from the source system
 		 * @return the boolean true or false
 		 * @throws ConnectorException the connector exception
@@ -111,8 +111,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to create the account in target system for the inputed create account connection attributes of connection configuration in SSM
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
-		 * @param data the Input data for the configured attributes through setConfig from connection 
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
 		 * @return the boolean true or false
 		 * @throws ConnectorException the connector exception
 		 */
@@ -128,8 +128,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to update the account in target system for the inputed update connection attributes of connection configuration in SSM
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
-		 * @param data the Input data for the configured attributes through setConfig from connection 
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
 		* @return the integer number of accounts updated
 		 * @throws ConnectorException the connector exception
 		 */
@@ -142,8 +142,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to lock the account in target system for the inputed lock account connection attributes of connection configuration in SSM
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
-		 * @param data the Input data for the configured attributes through setConfig from connection 
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
 		 * @return the boolean true or false
 		 * @throws ConnectorException the connector exception
 		 */
@@ -156,9 +156,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to disable the account in target system for the inputed disable connection attributes of connection configuration in SSM
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
-		 * @param data the Input data for the configured attributes through setConfig from connection tion information
-		 * @param data the data for input data from connection 
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection
 		 * @return the boolean true or false
 		 * @throws ConnectorException the connector exception
 		 */
@@ -171,8 +170,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to unlock the account in target system for the inputed unlock connection attributes of connection configuration in SSM
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
-		 * @param data the Input data for the configured attributes through setConfig from connection 
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
 		 * @return the boolean true or false
 		 * @throws ConnectorException the connector exception
 		 */
@@ -185,8 +184,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to enable the account in target system for the inputed enable account connection attributes of connection configuration in SSM
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
-		 * @param data the Input data for the configured attributes through setConfig from connection 
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
 		 * @return the boolean true or false
 		 * @throws ConnectorException the connector exception
 		 */
@@ -199,8 +198,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to terminate the account in target system for the inputed terminate account connection attributes of connection configuration in SSM
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
-		 * @param data the Input data for the configured attributes through setConfig from connection  
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection  
 		 * @return the integer number of accounts terminated
 		 * @throws ConnectorException the connector exception
 		 */
@@ -214,8 +213,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to remove the account in target system for the inputed remove account connection attributes of connection configuration in SSM
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
-		 * @param data the Input data for the configured attributes through setConfig from connection 
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
 		 * @return the integer number of accounts removed
 		 * @throws ConnectorException the connector exception
 		 */
@@ -228,8 +227,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to add access to the account in target system for the inputed addAccess to account connection attributes of connection configuration in SSM
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
-		 * @param data the Input data for the configured attributes through setConfig from connection 
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
 		 * @return the integer access granted count
 		 * @throws ConnectorException the connector exception
 		 */
@@ -243,8 +242,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to remove the account access in target system for the inputed remove account connection attributes of connection configuration in SSM
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
-		 * @param data the Input data for the configured attributes through setConfig from connection 
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
 		 * @return the integer
 		 * @throws ConnectorException the connector exception
 		 */
@@ -258,8 +257,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to change the password in target system for the inputed change password connection attributes of connection configuration in SSM
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
-		 * @param data the Input data for the configured attributes through setConfig from connection 
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
 		 * @return the boolean true or false
 		 * @throws ConnectorException the connector exception
 		 */
@@ -272,8 +271,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to create the user in target system for the inputed create user connection attributes of connection configuration in SSM
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
-		 * @param data the Input data for the configured attributes through setConfig from connection 
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
 		 * @return the boolean true or false
 		 * @throws ConnectorException the connector exception
 		 */
@@ -286,8 +285,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to update the user in target system for the inputed update user connection attributes of connection configuration in SSM
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
-		 * @param data the Input data for the configured attributes through setConfig from connection  
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection  
 		 * @return the integer
 		 * @throws ConnectorException the connector exception
 		 */
@@ -300,8 +299,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to update the entitlement in target system for the inputed account connection attributes of connection configuration in SSM
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
-		 * @param data the Input data for the configured attributes through setConfig from connection  
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection  
 		 * @return the integer
 		 * @throws ConnectorException the connector exception
 		 */
@@ -315,8 +314,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to create the entitlement in target system for the inputed create entitlement connection attributes of connection configuration in SSM
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
-		 * @param data the Input data for the configured attributes through setConfig from connection 
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
 		 * @return the boolean true or false
 		 * @throws ConnectorException the connector exception
 		 */
@@ -330,8 +329,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to validate credentials for the inputed crednetials connection attributes of connection configuration in SSM
 		 *
-		 * @param configData the config data for target connection information holds connection attributes
-		 * @param data the Input data for the configured attributes through setConfig from connection  
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection  
 		 * @return the boolean true or false
 		 * @throws ConnectorException the connector exception
 		 */
@@ -345,8 +344,8 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to get the summary of number of records for the given input object such as accounts.It provides number of accounts,users etc
 		 *
-	     * @param configData the config data for target connection information holds connection attributes
-		 * @param data the Input data for the configured attributes through setConfig from connection 
+	     * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
 		 * @return the summary map with object and count as key ,value 
 		 */
 		@Override
