@@ -71,7 +71,7 @@ public class SampleConnector extends BaseConnectorSpecification {
 		 * @param formatterClass the formatter class
 		 */
 		@Override
-		public void reconsile(Map<String, Object> configData, Map<String, Object> dataFromEcm, String formatterClass) {
+		public void reconcile(Map<String, Object> configData, Map<String, Object> dataFromEcm, String formatterClass) {
 			List<List<Map<String, Object>>> finalData = new ArrayList<List<Map<String, Object>>>();
 			List<Map<String, Object>> finalDataList = new ArrayList<Map<String, Object>>();
 			JSONObject jsonObject = new JSONObject(dataFromEcm.get("AccountReconJSON").toString());
