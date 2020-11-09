@@ -1,4 +1,4 @@
-package main.java.com.external.sample;
+package com.external.sample;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -357,7 +357,7 @@ public class SampleConnector extends BaseConnectorSpecification {
 		/**
 		 * to set the config with attributes needed for creating a connection in SSM.
 		 * The attributes defined in setConfig are the attributes that would dynamically
-		 * poupulate on connection creation under SSM
+		 * populate on connection creation under SSM
 		 *
 		 * @param configData the new config for input connection attributes from
 		 *                   connection created
