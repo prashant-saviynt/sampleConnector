@@ -30,7 +30,7 @@ public class SampleConnector extends BaseConnectorSpecification {
 		@Override
 		public String displayName() {
 		 
-			return "SAMPLE";
+			return "DummyConnector";
 		}
 
 		/**
@@ -60,6 +60,9 @@ public class SampleConnector extends BaseConnectorSpecification {
 		public Boolean test(Map<String, Object> configData, Map<String, Object> filterData) throws ConnectorException,
 				InvalidCredentialException, InvalidAttributeValueException, OperationTimeoutException, MissingKeyException {
 			//logic to test connection
+			System.out.println("Entered test method");
+			System.out.println("Data received :: " + configData);
+			System.out.println("Checking connection");
 			return true;
 		}
 
@@ -72,19 +75,30 @@ public class SampleConnector extends BaseConnectorSpecification {
 		 */
 		@Override
 		public void reconcile(Map<String, Object> configData, Map<String, Object> dataFromEcm, String formatterClass) {
+			System.out.println("Importing data");
 			List<List<Map<String, Object>>> finalData = new ArrayList<List<Map<String, Object>>>();
 			List<Map<String, Object>> finalDataList = new ArrayList<Map<String, Object>>();
-			JSONObject jsonObject = new JSONObject(dataFromEcm.get("AccountReconJSON").toString());
-			Map<String, Object> filterData = jsonObject.toMap();
-			System.out.println(filterData);
-			finalData.add(finalDataList);
-			try {
-				RepositoryReconService.notify(finalData, null, formatterClass, dataFromEcm);
-			} catch (Exception e) {
-				 
+			JSONObject jsonObject = null;
+			Long endpointId = Long.valueOf(dataFromEcm.get("endpointId").toString());
+		
+			
+			if(dataFromEcm.get("IMPORTABLE_OBJECT").equals("USER")) {
+				/* Write logic to pull users data */
+			}else if(dataFromEcm.get("IMPORTABLE_OBJECT").equals("ACCOUNT")) {
+				/*
+				 * Write your own logic to pull accounts Write your own logic to pull
+				 * entitlements Write your own logic to pull accounts and entitlements
+				 * relationship
+				 */
 			}
 			
-			 
+			finalData.add(finalDataList);
+			try {
+				System.out.println("calling RepositoryReconService.notify()");
+				RepositoryReconService.notify(finalData, endpointId, formatterClass, dataFromEcm);
+			} catch (Exception e) {
+				 System.out.print("Exception occured in importing data " + e);
+			}
 			
 		}
 
@@ -113,16 +127,16 @@ public class SampleConnector extends BaseConnectorSpecification {
 		 *
 		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
 		 * @param data the Input data for the data objects such as users,account etc from connection 
-		 * @return the boolean true or false
+		 * @return Map which consists of metadata to be updated in SSM (metadata built with help of reconcile json mapping)
 		 * @throws ConnectorException the connector exception
 		 */
 		@Override
-		public Boolean createAccount(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {
-			Boolean recordCreated=false;
+		public Map createAccount(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {
 			//Connect to target System With Config data 
-			//Create in target System 
+			//Create Account in target System 
 			//Return 
-			return recordCreated;
+			//Map which consists of metadata to be updated in SSM;
+			return null;
 		}
 
 		/**
@@ -130,12 +144,15 @@ public class SampleConnector extends BaseConnectorSpecification {
 		 *
 		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
 		 * @param data the Input data for the data objects such as users,account etc from connection 
-		* @return the integer number of accounts updated
+		* @return Map which consists of metadata to be updated in SSM (metadata built with help of reconcile json mapping)
 		 * @throws ConnectorException the connector exception
 		 */
 		@Override
-		public Integer updateAccount(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {
-			// TODO Auto-generated method stub
+		public Map updateAccount(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {
+			//Connect to target System With Config data 
+			//Update Account in target System 
+			//Return 
+			//Map which consists of metadata to be updated in SSM;
 			return null;
 		}
 
@@ -144,12 +161,15 @@ public class SampleConnector extends BaseConnectorSpecification {
 		 *
 		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
 		 * @param data the Input data for the data objects such as users,account etc from connection 
-		 * @return the boolean true or false
+		 * @return Map which consists of metadata to be updated in SSM (metadata built with help of reconcile json mapping)
 		 * @throws ConnectorException the connector exception
 		 */
 		@Override
-		public Boolean lockAccount(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {
-			// TODO Auto-generated method stub
+		public Map lockAccount(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {
+			//Connect to target System With Config data 
+			//lock Account in target System 
+			//Return 
+			//Map which consists of metadata to be updated in SSM;
 			return null;
 		}
 
@@ -158,12 +178,15 @@ public class SampleConnector extends BaseConnectorSpecification {
 		 *
 		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
 		 * @param data the Input data for the data objects such as users,account etc from connection
-		 * @return the boolean true or false
+		 * @return  Map which consists of metadata to be updated in SSM (metadata built with help of reconcile json mapping)
 		 * @throws ConnectorException the connector exception
 		 */
 		@Override
-		public Boolean disableAccount(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {
-			// TODO Auto-generated method stub
+		public Map disableAccount(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {
+			//Connect to target System With Config data 
+			//disable Account in target System 
+			//Return 
+			//Map which consists of metadata to be updated in SSM;
 			return null;
 		}
 
@@ -172,12 +195,15 @@ public class SampleConnector extends BaseConnectorSpecification {
 		 *
 		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
 		 * @param data the Input data for the data objects such as users,account etc from connection 
-		 * @return the boolean true or false
+		 * @return Map which consists of metadata to be updated in SSM (metadata built with help of reconcile json mapping)
 		 * @throws ConnectorException the connector exception
 		 */
 		@Override
-		public Boolean unLockAccount(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {
-			// TODO Auto-generated method stub
+		public Map unLockAccount(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {
+			//Connect to target System With Config data 
+			//unLock Account in target System 
+			//Return 
+			//Map which consists of metadata to be updated in SSM;
 			return null;
 		}
 
@@ -186,13 +212,17 @@ public class SampleConnector extends BaseConnectorSpecification {
 		 *
 		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
 		 * @param data the Input data for the data objects such as users,account etc from connection 
-		 * @return the boolean true or false
+		 * @return Map which consists of metadata to be updated in SSM (metadata built with help of reconcile json mapping)
 		 * @throws ConnectorException the connector exception
 		 */
 		@Override
-		public Boolean enableAccount(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {
-			// TODO Auto-generated method stub
+		public Map enableAccount(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {
+			//Connect to target System With Config data 
+			//enable Account in target System 
+			//Return 
+			//Map which consists of metadata to be updated in SSM;
 			return null;
+
 		}
 
 		/**
@@ -207,7 +237,7 @@ public class SampleConnector extends BaseConnectorSpecification {
 		public Integer terminateAccount(Map<String, Object> configData, Map<String, Object> data)
 				throws ConnectorException {
 			// TODO Auto-generated method stub
-			return null;
+			return 1;
 		}
 
 		/**
@@ -215,12 +245,15 @@ public class SampleConnector extends BaseConnectorSpecification {
 		 *
 		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
 		 * @param data the Input data for the data objects such as users,account etc from connection 
-		 * @return the integer number of accounts removed
+		 * @return Map which consists of metadata to be updated in SSM (metadata built with help of reconcile json mapping)
 		 * @throws ConnectorException the connector exception
 		 */
 		@Override
-		public Integer removeAccount(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {
-			// TODO Auto-generated method stub
+		public Map removeAccount(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {
+			//Connect to target System With Config data 
+			//remove Account in target System 
+			//Return 
+			//Map which consists of metadata to be updated in SSM;
 			return null;
 		}
 
@@ -229,13 +262,16 @@ public class SampleConnector extends BaseConnectorSpecification {
 		 *
 		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
 		 * @param data the Input data for the data objects such as users,account etc from connection 
-		 * @return the integer access granted count
+		 * @return Map which consists of metadata to be updated in SSM (metadata built with help of reconcile json mapping)
 		 * @throws ConnectorException the connector exception
 		 */
 		@Override
-		public Integer addAccessToAccount(Map<String, Object> configData, Map<String, Object> data)
+		public Map addAccessToAccount(Map<String, Object> configData, Map<String, Object> data)
 				throws ConnectorException {
-			// TODO Auto-generated method stub
+			//Connect to target System With Config data 
+			//add Access To Account in target System 
+			//Return 
+			//Map which consists of metadata to be updated in SSM;
 			return null;
 		}
 
@@ -244,13 +280,16 @@ public class SampleConnector extends BaseConnectorSpecification {
 		 *
 		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
 		 * @param data the Input data for the data objects such as users,account etc from connection 
-		 * @return the integer
+		 * @return Map which consists of metadata to be updated in SSM (metadata built with help of reconcile json mapping)
 		 * @throws ConnectorException the connector exception
 		 */
 		@Override
-		public Integer removeAccessToAccount(Map<String, Object> configData, Map<String, Object> data)
+		public Map removeAccessToAccount(Map<String, Object> configData, Map<String, Object> data)
 				throws ConnectorException {
-			// TODO Auto-generated method stub
+			//Connect to target System With Config data 
+			//remove Access To Account in target System 
+			//Return 
+			//Map which consists of metadata to be updated in SSM;
 			return null;
 		}
 
@@ -265,7 +304,7 @@ public class SampleConnector extends BaseConnectorSpecification {
 		@Override
 		public Boolean changePassword(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {
 			// TODO Auto-generated method stub
-			return null;
+			return true;
 		}
 
 		/**
@@ -279,7 +318,7 @@ public class SampleConnector extends BaseConnectorSpecification {
 		@Override
 		public Boolean createUser(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {
 			// TODO Auto-generated method stub
-			return null;
+			return true;
 		}
 
 		/**
@@ -293,7 +332,7 @@ public class SampleConnector extends BaseConnectorSpecification {
 		@Override
 		public Integer updateUser(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {
 			// TODO Auto-generated method stub
-			return null;
+			return 1;
 		}
 
 		/**
@@ -301,30 +340,30 @@ public class SampleConnector extends BaseConnectorSpecification {
 		 *
 		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
 		 * @param data the Input data for the data objects such as users,account etc from connection  
-		 * @return the integer
+		 * @return Map which consists of metadata to be updated in SSM (metadata built with help of reconcile json mapping)
 		 * @throws ConnectorException the connector exception
 		 */
 		@Override
-		public Integer updateEntitlement(Map<String, Object> configData, Map<String, Object> data)
-				throws ConnectorException {
-			// TODO Auto-generated method stub
-			return null;
-		}
+		public Map updateEntitlement(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {//Connect to target System With Config data 
+			// update Entitlement in target System 
+			//Return 
+			//Map which consists of metadata to be updated in SSM;
+			return null;}
 
 		/**
 		 * to create the entitlement in target system for the inputed create entitlement connection attributes of connection configuration in SSM
 		 *
 		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
 		 * @param data the Input data for the data objects such as users,account etc from connection 
-		 * @return the boolean true or false
+		 * @return Map which consists of metadata to be updated in SSM (metadata built with help of reconcile json mapping)
 		 * @throws ConnectorException the connector exception
 		 */
 		@Override
-		public Boolean createEntitlement(Map<String, Object> configData, Map<String, Object> data)
-				throws ConnectorException {
-			// TODO Auto-generated method stub
-			return null;
-		}
+		public Map createEntitlement(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException {//Connect to target System With Config data 
+			// create Entitlement in target System 
+			//Return 
+			//Map which consists of metadata to be updated in SSM;
+			return null;}
 
 		/**
 		 * to validate credentials for the inputed crednetials connection attributes of connection configuration in SSM
@@ -338,7 +377,7 @@ public class SampleConnector extends BaseConnectorSpecification {
 		public Boolean validateCredentials(Map<String, Object> configData, Map<String, Object> data)
 				throws ConnectorException {
 			// TODO Auto-generated method stub
-			return null;
+			return true;
 		}
 
 		/**
@@ -364,8 +403,145 @@ public class SampleConnector extends BaseConnectorSpecification {
 		 */
 		@Override
 		public void setConfig(ConfigDataVo configData) {
-			// TODO Auto-generated method stub
+			List<String> connectionAttributes = configData.getConnectionAttributes();
+				connectionAttributes.add("Username");
+				connectionAttributes.add("Password");
+				connectionAttributes.add("Url");
+				connectionAttributes.add("ReconcileJSON");
+				connectionAttributes.add("CreateUserJSON");
+				connectionAttributes.add("UpdateUserJSON");
+				connectionAttributes.add("RemoveAccountJSON");
 
 		}
+		
+		public void encryptedConnectionAttributes(ConfigDataVo configData) {
+			List<String> encryptedConnectionAttributes = configData.getEncryptedConnectionAttributes();
+					encryptedConnectionAttributes.add("Password");
+
+		}
+		
+		public void ConnectionAttributesDescription(ConfigDataVo configData) {
+			String ConnectionAttributesDescription = configData.getConnectionAttributesDescription();
+			JSONObject jsonObject = new JSONObject(ConnectionAttributesDescription);
+			jsonObject.put("Username", "Provide username to connect with application");
+			jsonObject.put("Password", "Provide password to connect with application");
+			jsonObject.put("Url", "Provide URL to connect with application");
+			
+			jsonObject.put("CreateUserJSON", "SAMPLE JSON {'query':['Valid Sql Query']}");
+			jsonObject.put("UpdateUserJSON", "SAMPLE JSON {'query':['Valid Sql Query']}");
+			jsonObject.put("RemoveAccountJSON", "SAMPLE JSON For {'query':['Valid Sql Query']}");
+			configData.setConnectionAttributesDescription(jsonObject.toString());
+		}
+		
+		/**
+		 * to removeEntitlement in target system for the inputed create account connection attributes of connection configuration in SSM
+		 *
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
+		 * @return true/false
+		 * @throws ConnectorException the connector exception
+		 */
+		@Override
+		public Boolean removeEntitlement(Map<String, Object> configData, Map<String, Object> data)
+				throws ConnectorException {
+			// remove Entitlement in target System 
+			//Return 
+			return true;
+		}
+		
+		/**
+		 * to addAccessToEntitlement in target system for the inputed create account connection attributes of connection configuration in SSM
+		 *
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
+		 * @return true/false
+		 * @throws ConnectorException the connector exception
+		 */
+		@Override
+		public Boolean addAccessToEntitlement(Map<String, Object> configData, Map<String, Object> data)
+				throws ConnectorException {
+			// add Access to Entitlement in target System 
+			//Return
+			return true;
+		}
 	    
+		/**
+		 * to removeAccessToEntitlement in target system for the inputed create account connection attributes of connection configuration in SSM
+		 *
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
+		 * @return true/false
+		 * @throws ConnectorException the connector exception
+		 */
+		@Override
+		public Boolean removeAccessToEntitlement(Map<String, Object> configData, Map<String, Object> data)
+				throws ConnectorException {
+			// remove access Entitlement in target System 
+			//Return
+			return true;
+		}
+
+		/**
+		 * to perform firefighterIdInstanceRevokeAccess in target system for the inputed create account connection attributes of connection configuration in SSM
+		 *
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
+		 * @return Map which consists of metadata to be updated in SSM (metadata built with help of reconcile json mapping)
+		 * @throws ConnectorException the connector exception
+		 */
+		@Override
+		public Map firefighterIdGrantAccess(Map<String, Object> configData, Map<String, Object> data)
+				throws ConnectorException {//Connect to target System With Config data 
+			//firefighterIdGrantAccess in target System 
+			//Return 
+			//Map which consists of metadata to be updated in SSM;
+			return null;}
+
+		/**
+		 * to perform firefighterIdInstanceRevokeAccess in target system for the inputed create account connection attributes of connection configuration in SSM
+		 *
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
+		 * @return Map which consists of metadata to be updated in SSM (metadata built with help of reconcile json mapping)
+		 * @throws ConnectorException the connector exception
+		 */
+		@Override
+		public Map firefighterIdRevokeAccess(Map<String, Object> configData, Map<String, Object> data)
+				throws ConnectorException {//Connect to target System With Config data 
+			//firefighterIdRevokeAccess in target System 
+			//Return 
+			//Map which consists of metadata to be updated in SSM;
+			return null;}
+
+		/**
+		 * to perform firefighterIdInstanceRevokeAccess in target system for the inputed create account connection attributes of connection configuration in SSM
+		 *
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
+		 * @return Map which consists of metadata to be updated in SSM (metadata built with help of reconcile json mapping)
+		 * @throws ConnectorException the connector exception
+		 */
+		@Override
+		public Map firefighterIdInstanceGrantAccess(Map<String, Object> configData, Map<String, Object> data)
+				throws ConnectorException {//Connect to target System With Config data 
+			//firefighterIdInstanceGrantAccess in target System 
+			//Return 
+			//Map which consists of metadata to be updated in SSM;
+			return null;}
+		
+		/**
+		 * to perform firefighterIdInstanceRevokeAccess in target system for the inputed create account connection attributes of connection configuration in SSM
+		 *
+		 * @param configData the config data for target connection information and other system configuration attributes such as version,status threshold
+		 * @param data the Input data for the data objects such as users,account etc from connection 
+		 * @return Map which consists of metadata to be updated in SSM (metadata built with help of reconcile json mapping)
+		 * @throws ConnectorException the connector exception
+		 */
+		@Override
+		public Map firefighterIdInstanceRevokeAccess(Map<String, Object> configData, Map<String, Object> data)
+				throws ConnectorException {//Connect to target System With Config data 
+			// firefighterIdInstanceRevokeAccess in target System 
+			//Return 
+			//Map which consists of metadata to be updated in SSM;
+			return null;}
 }
