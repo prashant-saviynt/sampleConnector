@@ -29,7 +29,7 @@
 		<artifactId>abstractConnector</artifactId>
 		<version>8.10.3</version>   		
 		<scope>system</scope>    	
-		<systemPath>${project.basedir}/lib/abstractConnector-8.10.3.jar</systemPath>    </dependency>
+		<systemPath>${project.basedir}/lib/abstractConnector-8.10.9.jar</systemPath>    </dependency>
 
 
 		<dependency>
