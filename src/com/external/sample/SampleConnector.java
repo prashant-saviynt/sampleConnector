@@ -57,8 +57,9 @@ public class SampleConnector extends BaseConnectorSpecification {
 		 * Example : To test the connection , refer to the below steps
 		 * step 1  : retrieve connection attributes from configData/Data
 		 * step 2  : connect to target system using JDBC connection
-		 * step 3  : return true if connection is successful
-		 *
+		 * step 3  : return true in Map as given below if connection is successful.
+		 *			 Map response = new HashMap();
+		 *			 response.put("status", true);
 	     * @param configData the configData This is a metadata that contains the details of the information required 
 		          and configurations needed for establishing the connectivity to the target system and for doing provisioning and reconciliation operations. 
 		          This is defined in setConfig().These appear as JSON or fields on the UI that have to be inputed at the time of creating the connection for this connector in SSM
@@ -67,7 +68,7 @@ public class SampleConnector extends BaseConnectorSpecification {
 				  Along with connection attributes, this parameter also contains some additional information (key value pairs) that can be used during
 	              provisioning,reconciliation etc. e.g IMPORTABLE_OBJECT - This signifies whether account recon or user recon is happening. Valid values ("ACCOUNT","USER") 
 	              endpointId -  contains endpoint Id for the endpoint corresponding to this connector
-		 * @return the boolean true or false
+		 * @return the connectivity status in the Map.
 		 * @throws ConnectorException the connector exception
 		 * @throws InvalidCredentialException the invalid credential exception
 		 * @throws InvalidAttributeValueException the invalid attribute value exception
@@ -75,13 +76,15 @@ public class SampleConnector extends BaseConnectorSpecification {
 		 * @throws MissingKeyException the missing key exception
 		 */
 		@Override
-		public Boolean test(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException,
+		public Map test(Map<String, Object> configData, Map<String, Object> data) throws ConnectorException,
 				InvalidCredentialException, InvalidAttributeValueException, OperationTimeoutException, MissingKeyException {
 			//logic to test connection
 			//connect to target system using configData
 			//write your logic
 			//return true or false 
-			return true;
+			Map response = new HashMap();
+			response.put("status", true); //true If connection to target is successful otherwise false.
+			return response;
 		}
 		/**
 		 * to set the config with attributes needed for creating a connection to the target system from SSM.
