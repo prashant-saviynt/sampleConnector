@@ -8,7 +8,8 @@ Custom connectors allow SSM to manage accounts, entitlements, and users in exter
 
 ## Prerequisites
 
-- Java 11
+- The [Saviynt Security Manager (SSM)](https://saviynt.com) should be on 25.Brisbane or above.
+- Java 21
 - Maven 3.x
 
 ## Project Structure
@@ -16,7 +17,7 @@ Custom connectors allow SSM to manage accounts, entitlements, and users in exter
 ```
 sampleConnector/
 ├── lib/
-│   └── abstractConnector-8.11.1.jar   # Saviynt connector framework (local dependency)
+│   └── abstractConnector-9.4.9.jar   # Saviynt connector framework (local dependency)
 ├── src/main/java/com/external/sample/
 │   └── SampleConnector.java           # Main connector implementation
 └── pom.xml
